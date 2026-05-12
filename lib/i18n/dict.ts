@@ -138,6 +138,8 @@ const en: Dict = {
   "settings.danger.confirmNo": "Cancel",
 
   // About
+  "model.more": "Coming soon",
+  "model.more.desc": "More Typhoon variants are on the way.",
   "rail.about": "About this project",
   "about.tagline": "Open-source Typhoon AI chat client",
   "about.description":
@@ -254,6 +256,8 @@ const th: Dict = {
   "settings.danger.confirmYes": "ยืนยัน",
   "settings.danger.confirmNo": "ยกเลิก",
 
+  "model.more": "เร็ว ๆ นี้",
+  "model.more.desc": "โมเดล Typhoon รุ่นอื่นกำลังจะมา",
   "rail.about": "เกี่ยวกับโปรเจกต์",
   "about.tagline": "Typhoon AI chat client แบบ open-source",
   "about.description":
@@ -371,6 +375,8 @@ const ja: Dict = {
   "settings.danger.confirmYes": "確認",
   "settings.danger.confirmNo": "キャンセル",
 
+  "model.more": "近日公開",
+  "model.more.desc": "新しい Typhoon モデルが追加予定です。",
   "rail.about": "プロジェクトについて",
   "about.tagline": "オープンソースの Typhoon AI チャットクライアント",
   "about.description":
@@ -485,6 +491,8 @@ const zh: Dict = {
   "settings.danger.confirmYes": "确认",
   "settings.danger.confirmNo": "取消",
 
+  "model.more": "敬请期待",
+  "model.more.desc": "更多 Typhoon 模型即将推出。",
   "rail.about": "关于本项目",
   "about.tagline": "开源 Typhoon AI 聊天客户端",
   "about.description":

@@ -126,7 +126,7 @@ export function Onboarding({ onSave }: OnboardingProps) {
               }
             />
             <a
-              href="https://opentyphoon.ai"
+              href="https://playground.opentyphoon.ai/"
               target="_blank"
               rel="noreferrer noopener"
               className="mt-1.5 inline-flex items-center gap-1 text-[12px] text-ink-500 hover:text-ink-900 transition-colors"
