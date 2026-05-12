@@ -44,7 +44,7 @@ This is that client. Paper-aesthetic UI, one-file-per-feature codebase, zero bac
 ## Quick Start
 
 ```bash
-git clone https://github.com/<your-username>/typhoon-chat
+git clone https://github.com/luraselenehalo/typhoon-chat
 cd typhoon-chat
 npm install
 npm run dev

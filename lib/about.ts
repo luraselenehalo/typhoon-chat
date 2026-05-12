@@ -5,11 +5,10 @@
 export const ABOUT = {
   name: "Typhoon Chat",
   version: "0.1.0",
-  // TODO: replace with your GitHub repo URL once you've published
-  repoUrl: "https://github.com/your-username/typhoon-chat",
-  issuesUrl: "https://github.com/your-username/typhoon-chat/issues",
+  repoUrl: "https://github.com/luraselenehalo/typhoon-chat",
+  issuesUrl: "https://github.com/luraselenehalo/typhoon-chat/issues",
   licenseUrl:
-    "https://github.com/your-username/typhoon-chat/blob/main/LICENSE",
+    "https://github.com/luraselenehalo/typhoon-chat/blob/main/LICENSE",
   license: "MIT",
   builtWith: [
     "Next.js",
