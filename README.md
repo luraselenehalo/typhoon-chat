@@ -4,10 +4,15 @@
 
 **A minimalist, BYO-key chat client for [Typhoon](https://opentyphoon.ai) — Thailand's leading open-source Thai-first AI from SCB 10X.**
 
+[![Live Demo](https://img.shields.io/badge/demo-typhoon--chat.onrender.com-22e6ff?logo=render&logoColor=white)](https://typhoon-chat.onrender.com/)
 [![License: MIT](https://img.shields.io/badge/license-MIT-1a1a1a)](LICENSE)
 [![Next.js 14](https://img.shields.io/badge/Next.js-14-1a1a1a)](https://nextjs.org)
 [![Typhoon 2.5](https://img.shields.io/badge/Typhoon-2.5-22e6ff)](https://opentyphoon.ai)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-22e6ff)](#contributing)
+
+### [→ Try it live at typhoon-chat.onrender.com](https://typhoon-chat.onrender.com/)
+
+*Bring your own [Typhoon API key](https://opentyphoon.ai) — the demo runs the same code as this repo, with no server-side storage. Free Render tier means the first request after idle may take ~30 s to cold-start.*
 
 [Features](#features) · [Quick Start](#quick-start) · [Architecture](#architecture) · [Deployment](#deployment) · [Security](#privacy--security)
 
