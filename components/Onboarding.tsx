@@ -74,12 +74,12 @@ export function Onboarding({ onSave }: OnboardingProps) {
   };
 
   return (
-    <main className="min-h-screen w-screen p-3 md:p-4 bg-paper-200 grid place-items-center">
+    <main className="min-h-dvh w-screen p-3 md:p-4 bg-paper-200 grid place-items-center">
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.4, ease: "easeOut" }}
-        className="w-full max-w-md bg-paper-100 rounded-[28px] hairline shadow-card p-7 md:p-8"
+        className="w-full max-w-md bg-paper-100 rounded-3xl md:rounded-[28px] hairline shadow-card p-6 md:p-8"
       >
         <div className="flex items-center gap-2.5 mb-7">
           <BrandMark />

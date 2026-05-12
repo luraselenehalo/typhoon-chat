@@ -1,0 +1,24 @@
+# Render Blueprint — Infrastructure as Code for this repo.
+#
+# When you connect this repo to Render, it will auto-detect this file and
+# apply the config below. You can still edit each service from the dashboard
+# after deploy — this just bootstraps the initial setup.
+#
+# Docs: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: typhoon-chat
+    runtime: node
+    region: singapore
+    plan: free
+    branch: main
+    buildCommand: npm install && npm run build
+    startCommand: npm start
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      # Uncomment to point at a custom Typhoon endpoint (e.g. self-hosted).
+      # - key: TYPHOON_BASE_URL
+      #   value: https://api.opentyphoon.ai/v1

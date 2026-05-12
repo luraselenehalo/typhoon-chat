@@ -1,11 +1,15 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef } from "react";
 import { HistoryPanel } from "./HistoryPanel";
 import { IconRail } from "./IconRail";
 import type { Conversation } from "@/lib/types";
 
 interface SidebarShellProps {
+  /** Open state lifted up — parent controls both desktop hover/pin and
+      the mobile hamburger entry-point. */
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
   onNew: () => void;
   onOpenAbout: () => void;
   conversations: Conversation[];
@@ -14,24 +18,25 @@ interface SidebarShellProps {
   onDelete: (id: string) => void;
 }
 
-const HOVER_OPEN_DELAY = 2000; // ms — must dwell on the rail this long
-const HOVER_CLOSE_DELAY = 200; // ms — grace period when crossing the gap
+const HOVER_OPEN_DELAY = 2000;
+const HOVER_CLOSE_DELAY = 200;
 
 /**
- * Wraps icon rail + history panel.
+ * Sidebar shell.
  *
- * Two ways to expand:
- *  1. Click the PanelLeft button → pins open instantly.
- *  2. Hover for `HOVER_OPEN_DELAY` ms (2s) → auto-expands.
+ * - On **desktop** (md+), the rail is visible. Hovering for 2 s expands the
+ *   panel, hover-out collapses it after a short grace period. The PanelLeft
+ *   button toggles a "pinned" state that bypasses the hover delay.
+ * - On **mobile**, the rail is hidden entirely. The history panel renders
+ *   as a slide-in drawer over a backdrop; the open trigger lives in the
+ *   TopBar's hamburger.
  *
- * The hover delay is deliberately long so the panel doesn't pop out just
- * because the user's cursor grazed the edge. Pinning bypasses the delay
- * entirely.
- *
- * Closing always honours a short grace period so the user can cross the
- * gap from rail → panel without the panel snapping shut underneath them.
+ * Both modes write to the same `open` prop owned by the page, so toggling
+ * from any surface keeps state consistent.
  */
 export function SidebarShell({
+  open,
+  onOpenChange,
   onNew,
   onOpenAbout,
   conversations,
@@ -39,8 +44,6 @@ export function SidebarShell({
   onSelect,
   onDelete,
 }: SidebarShellProps) {
-  const [hovering, setHovering] = useState(false);
-  const [pinned, setPinned] = useState(false);
   const openTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const closeTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
@@ -60,63 +63,83 @@ export function SidebarShell({
       clearTimeout(closeTimer.current);
       closeTimer.current = null;
     }
-    if (hovering || pinned || openTimer.current) return;
+    if (open || openTimer.current) return;
     openTimer.current = setTimeout(() => {
-      setHovering(true);
+      onOpenChange(true);
       openTimer.current = null;
     }, HOVER_OPEN_DELAY);
   };
 
   const handleLeave = () => {
-    // Cancel any pending open — user's no longer dwelling
     if (openTimer.current) {
       clearTimeout(openTimer.current);
       openTimer.current = null;
     }
-    if (!hovering) return;
+    if (!open) return;
     closeTimer.current = setTimeout(() => {
-      setHovering(false);
+      onOpenChange(false);
       closeTimer.current = null;
     }, HOVER_CLOSE_DELAY);
   };
 
   useEffect(() => () => clearTimers(), [clearTimers]);
 
-  const open = pinned || hovering;
-
   return (
-    <div
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
-      className="relative flex shrink-0"
-    >
-      <IconRail
-        onNew={() => {
-          onNew();
-          if (pinned) setPinned(false);
-        }}
-        onToggleHistory={() => {
-          // Pin toggle bypasses the hover delay entirely
-          clearTimers();
-          setHovering(false);
-          setPinned((p) => !p);
-        }}
-        onOpenAbout={onOpenAbout}
-        newActive={!open}
-      />
-      <HistoryPanel
-        open={open}
-        conversations={conversations}
-        activeId={activeId}
-        onSelect={(id) => {
-          onSelect(id);
-          if (!pinned) {
+    <>
+      {/* Desktop rail + inline panel — hidden on mobile.
+          Hover listeners are scoped to this wrapper, so no mobile event
+          ever fires them. */}
+      <div
+        onMouseEnter={handleEnter}
+        onMouseLeave={handleLeave}
+        className="hidden md:flex relative shrink-0"
+      >
+        <IconRail
+          onNew={() => {
+            onNew();
+            if (open) onOpenChange(false);
+          }}
+          onToggleHistory={() => {
             clearTimers();
-            setHovering(false);
-          }
-        }}
-        onDelete={onDelete}
-      />
-    </div>
+            onOpenChange(!open);
+          }}
+          onOpenAbout={onOpenAbout}
+          newActive={!open}
+        />
+        <HistoryPanel
+          open={open}
+          conversations={conversations}
+          activeId={activeId}
+          onSelect={(id) => {
+            onSelect(id);
+            // Hover-opened panels auto-collapse on select; pinned ones stay
+            clearTimers();
+            onOpenChange(false);
+          }}
+          onDelete={onDelete}
+          onClose={() => onOpenChange(false)}
+          onOpenAbout={onOpenAbout}
+        />
+      </div>
+
+      {/* Mobile drawer renders independently of the desktop block.
+          The HistoryPanel itself decides which presentation to render
+          via responsive classes — this just lives outside the rail
+          wrapper so it can overlay full-screen. */}
+      <div className="md:hidden">
+        <HistoryPanel
+          open={open}
+          conversations={conversations}
+          activeId={activeId}
+          onSelect={(id) => {
+            onSelect(id);
+            onOpenChange(false);
+          }}
+          onDelete={onDelete}
+          onClose={() => onOpenChange(false)}
+          onOpenAbout={onOpenAbout}
+        />
+      </div>
+    </>
   );
 }

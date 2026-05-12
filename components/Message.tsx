@@ -57,7 +57,7 @@ function UserMessage({ message }: { message: MessageType }) {
       transition={{ duration: 0.22, ease: "easeOut" }}
       className="flex justify-end py-2.5"
     >
-      <div className="max-w-[78%]">
+      <div className="max-w-[88%] md:max-w-[78%]">
         {message.attachments && message.attachments.length > 0 && (
           <div className="mb-1.5 flex flex-wrap gap-1.5 justify-end">
             {message.attachments.map((a, i) => (
@@ -128,7 +128,9 @@ function AssistantMessage({
       <Markdown>{message.content}</Markdown>
 
       {isComplete && message.content && (
-        <div className="mt-2 flex items-center gap-0.5 opacity-0 group-hover:opacity-100 transition-opacity">
+        // Mobile / touch devices: actions visible always (no hover).
+        // Desktop: classic reveal-on-hover.
+        <div className="mt-2 flex items-center gap-0.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
           <IconButton onClick={handleCopy} label={t("message.copy")}>
             {copied ? (
               <Check size={13} className="text-emerald-600" />

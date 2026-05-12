@@ -33,7 +33,7 @@ export function AboutModal({ open, onClose }: AboutModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 grid place-items-center p-4 bg-black/40 backdrop-blur-sm"
+      className="fixed inset-0 z-50 grid place-items-stretch md:place-items-center md:p-4 bg-black/40 backdrop-blur-sm"
       onClick={onClose}
     >
       <motion.div
@@ -41,7 +41,7 @@ export function AboutModal({ open, onClose }: AboutModalProps) {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.18, ease: "easeOut" }}
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-md bg-paper-100 rounded-3xl hairline shadow-card overflow-hidden"
+        className="w-full md:max-w-md bg-paper-100 md:rounded-3xl md:hairline md:shadow-card overflow-y-auto md:overflow-hidden h-dvh md:h-auto"
       >
         {/* Header — brand mark + version on the left, close on the right */}
         <header className="flex items-start justify-between px-6 pt-6 pb-4">

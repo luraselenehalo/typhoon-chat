@@ -144,7 +144,7 @@ export function SettingsModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 grid place-items-center p-4 bg-black/40 backdrop-blur-sm"
+      className="fixed inset-0 z-50 grid place-items-stretch md:place-items-center md:p-4 bg-black/40 backdrop-blur-sm"
       onClick={onClose}
     >
       <motion.div
@@ -152,7 +152,7 @@ export function SettingsModal({
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.18, ease: "easeOut" }}
         onClick={(e) => e.stopPropagation()}
-        className="w-full max-w-lg bg-paper-100 rounded-3xl hairline shadow-card overflow-hidden flex flex-col max-h-[88vh]"
+        className="w-full md:max-w-lg bg-paper-100 md:rounded-3xl md:hairline md:shadow-card overflow-hidden flex flex-col h-dvh md:h-auto md:max-h-[88vh]"
       >
             <header className="flex items-center justify-between px-6 pt-5 pb-3 shrink-0">
               <div>

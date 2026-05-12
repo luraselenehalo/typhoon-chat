@@ -55,6 +55,19 @@ body {
   color: rgb(var(--ink-900));
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  /* Lock outer scroll so the inner messages container is the only thing
+     that scrolls — prevents pull-to-refresh on the wrong axis. */
+  overscroll-behavior-y: none;
+}
+
+/* Prevent iOS from auto-zooming the page when the user taps an input
+   that has font-size < 16px. Apply on textarea + text inputs only. */
+@media (max-width: 767px) {
+  input[type="text"],
+  input[type="password"],
+  textarea {
+    font-size: 16px;
+  }
 }
 
 /* Cross-theme transition — applied only on color properties so layout
@@ -89,5 +102,14 @@ html.theme-ready * {
   /* The hairline used everywhere — flips with theme via --hairline-color */
   .hairline {
     border: 1px solid var(--hairline-color);
+  }
+
+  /* Hide scrollbar while still allowing scroll (composer chip overflow) */
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
 }

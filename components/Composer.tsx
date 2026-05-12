@@ -236,8 +236,10 @@ export function Composer({
         </div>
       )}
 
-      <div className="flex items-center justify-between px-3 pb-3 pt-1">
-        <div className="flex items-center gap-1">
+      <div className="flex items-center justify-between gap-2 px-2 md:px-3 pb-3 pt-1">
+        {/* Chip row scrolls horizontally on narrow phones rather than wrapping
+            — keeps the composer height stable. */}
+        <div className="flex items-center gap-1 min-w-0 overflow-x-auto no-scrollbar">
           <input
             ref={fileInputRef}
             type="file"
@@ -262,7 +264,6 @@ export function Composer({
             icon={<Lightbulb size={13} strokeWidth={1.75} />}
             label={t("composer.reason")}
           />
-
         </div>
 
         <AnimatePresence mode="wait" initial={false}>

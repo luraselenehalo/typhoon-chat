@@ -36,6 +36,7 @@ function App({
 }) {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const { settings, replace: replaceSettings } = useSettings();
   const chat = useChat({ apiKey: user.apiKey, settings });
@@ -61,11 +62,18 @@ function App({
     chat.send(payload);
   };
 
+  // Outer frame collapses on mobile — full bleed canvas, no rounded
+  // corners — because the device chrome already provides the frame.
   return (
-    <main className="min-h-screen w-screen p-3 md:p-4 bg-paper-200">
-      <div className="relative h-[calc(100vh-1.5rem)] md:h-[calc(100vh-2rem)] rounded-[28px] bg-paper-100 hairline overflow-hidden flex">
+    <main className="min-h-dvh w-screen p-0 md:p-3 lg:p-4 bg-paper-200">
+      <div className="relative h-dvh md:h-[calc(100dvh-1.5rem)] lg:h-[calc(100dvh-2rem)] rounded-none md:rounded-[28px] bg-paper-100 md:hairline overflow-hidden flex">
         <SidebarShell
-          onNew={chat.startNew}
+          open={sidebarOpen}
+          onOpenChange={setSidebarOpen}
+          onNew={() => {
+            chat.startNew();
+            setSidebarOpen(false);
+          }}
           onOpenAbout={() => setAboutOpen(true)}
           conversations={chat.conversations}
           activeId={chat.activeId}
@@ -79,6 +87,11 @@ function App({
             onModelChange={chat.setModel}
             displayName={user.displayName}
             onOpenSettings={() => setSettingsOpen(true)}
+            onOpenSidebar={() => setSidebarOpen(true)}
+            onNew={() => {
+              chat.startNew();
+              setSidebarOpen(false);
+            }}
           />
 
           {empty ? (
@@ -169,12 +182,12 @@ function EmptyHero({
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-7"
+          className="text-center mb-6 md:mb-7"
         >
-          <h1 className="text-[28px] md:text-[34px] font-medium tracking-tight text-ink-900">
+          <h1 className="text-[22px] md:text-[34px] font-medium tracking-tight text-ink-900 leading-tight">
             {greeting}
           </h1>
-          <p className="mt-1.5 text-[14px] text-ink-500">
+          <p className="mt-1.5 text-[13px] md:text-[14px] text-ink-500">
             {t("greeting.subtitle")}
           </p>
         </motion.div>
@@ -214,7 +227,7 @@ function FloatingComposer({
 }: FloatingProps) {
   const { t } = useI18n();
   return (
-    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 px-4 md:px-8 pb-6">
+    <div className="pointer-events-none absolute inset-x-0 bottom-0 z-10 px-3 md:px-8 pb-3 md:pb-6">
       <div
         aria-hidden
         className="absolute inset-x-0 -top-16 h-16 bg-gradient-to-t from-paper-100 to-transparent"
@@ -226,7 +239,7 @@ function FloatingComposer({
           isStreaming={isStreaming}
           apiKey={apiKey}
         />
-        <p className="mt-2.5 text-center text-[11px] text-ink-400">
+        <p className="mt-2 md:mt-2.5 text-center text-[11px] text-ink-400">
           {t("footer.disclaimer")}
         </p>
       </div>

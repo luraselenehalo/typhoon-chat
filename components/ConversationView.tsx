@@ -81,8 +81,8 @@ export function ConversationView({
     <div ref={scrollRef} className="flex-1 overflow-y-auto w-full">
       {/* Natural top-down flow — first message lands near the top of the
           viewport, conversation grows downward. */}
-      <div className="pt-8 pb-40">
-        <div className="mx-auto w-full max-w-2xl px-6 space-y-2">
+      <div className="pt-4 md:pt-8 pb-40">
+        <div className="mx-auto w-full max-w-2xl px-4 md:px-6 space-y-2">
           {messages.map((m, i) => (
             <Message
               key={m.id}

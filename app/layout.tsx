@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import { themeBootScript } from "@/lib/theme";
 import { SettingsProvider } from "@/lib/useSettings";
@@ -14,6 +14,19 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "Typhoon Chat",
   description: "A minimalist Thai-first AI chat interface.",
+};
+
+/**
+ * Viewport-fit `cover` lets the app draw under the iOS notch / status bar;
+ * combined with safe-area-inset padding (in globals.css) we end up with a
+ * full-bleed mobile shell that doesn't hide content behind home indicators.
+ * `maximumScale: 1` prevents the dreaded iOS auto-zoom on input focus.
+ */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 1,
+  viewportFit: "cover",
 };
 
 export default function RootLayout({
