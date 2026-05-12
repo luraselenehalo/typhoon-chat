@@ -44,7 +44,44 @@ This is that client. Paper-aesthetic UI, one-file-per-feature codebase, zero bac
 
 ## Screenshots
 
-> Drop screenshots in `docs/screenshots/` and reference them here once you have a deploy URL.
+<table>
+  <tr>
+    <td width="50%">
+      <img src="docs/screenshots/01-onboarding.png" alt="Onboarding" />
+      <p align="center"><sub><b>Onboarding</b> — display name + Typhoon API key, validated before save</sub></p>
+    </td>
+    <td width="50%">
+      <img src="docs/screenshots/02-greeting.png" alt="Greeting" />
+      <p align="center"><sub><b>Greeting</b> — time-aware welcome with the user's name</sub></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="docs/screenshots/03-conversation.png" alt="Conversation" />
+      <p align="center"><sub><b>Conversation</b> — user pill on the right, assistant plain on the left</sub></p>
+    </td>
+    <td width="50%">
+      <img src="docs/screenshots/07-about.png" alt="About modal" />
+      <p align="center"><sub><b>About</b> — GitHub link, license, credits</sub></p>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%">
+      <img src="docs/screenshots/04-settings-basic.png" alt="Settings · Basic" />
+      <p align="center"><sub><b>Settings · Basic</b> — name, API key, theme, language</sub></p>
+    </td>
+    <td width="50%">
+      <img src="docs/screenshots/06-settings-advanced.png" alt="Settings · Advanced" />
+      <p align="center"><sub><b>Settings · Advanced</b> — model sampling params with per-field reset</sub></p>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" width="100%">
+      <img src="docs/screenshots/05-language-picker.png" alt="Language picker" />
+      <p align="center"><sub><b>Language picker</b> — EN / ไทย / 日本語 / 中文, swaps the entire UI instantly</sub></p>
+    </td>
+  </tr>
+</table>
 
 ## Quick Start
 
