@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Light theme — warm cream paper */
+:root {
+  /* Background ladder, from most elevated to deepest frame */
+  --paper-50: 250 249 245;
+  --paper-100: 244 242 236;
+  --paper-200: 235 233 227;
+  --paper-300: 226 223 214;
+  --paper-400: 200 197 187;
+
+  /* Foreground ladder, from strongest to disabled */
+  --ink-900: 26 26 26;
+  --ink-700: 61 61 58;
+  --ink-500: 107 105 99;
+  --ink-400: 142 140 132;
+  --ink-300: 179 177 168;
+
+  /* Borders + shadows are derived from semantic vars to flip cleanly */
+  --hairline-color: rgba(0, 0, 0, 0.06);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.04),
+    0 8px 24px -12px rgba(0, 0, 0, 0.08);
+  --shadow-frame: 0 0 0 1px rgba(0, 0, 0, 0.04);
+
+  color-scheme: light;
+}
+
+/* Dark theme — warm-cool dark, keeps the elevation logic intact */
+.dark {
+  --paper-50: 32 32 38;    /* card surface — most elevated */
+  --paper-100: 20 20 26;   /* app canvas */
+  --paper-200: 10 10 12;   /* outer frame — deepest */
+  --paper-300: 44 44 50;   /* dividers / chip resting */
+  --paper-400: 70 70 76;
+
+  --ink-900: 240 238 232;  /* primary text */
+  --ink-700: 200 198 192;
+  --ink-500: 147 145 139;
+  --ink-400: 107 105 99;
+  --ink-300: 74 72 68;
+
+  --hairline-color: rgba(255, 255, 255, 0.06);
+  --shadow-card: 0 1px 2px rgba(0, 0, 0, 0.4),
+    0 12px 32px -12px rgba(0, 0, 0, 0.6);
+  --shadow-frame: 0 0 0 1px rgba(255, 255, 255, 0.04);
+
+  color-scheme: dark;
+}
+
+html,
+body {
+  background: rgb(var(--paper-200));
+  color: rgb(var(--ink-900));
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Cross-theme transition — applied only on color properties so layout
+   changes (resize, scroll) stay instant. */
+html.theme-ready,
+html.theme-ready * {
+  transition:
+    background-color 200ms ease,
+    border-color 200ms ease,
+    color 200ms ease,
+    fill 200ms ease,
+    stroke 200ms ease;
+}
+
+/* Scrollbar — adapts to current theme via the foreground vars */
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-track {
+  background: transparent;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgb(var(--ink-400) / 0.2);
+  border-radius: 999px;
+}
+*::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--ink-400) / 0.45);
+}
+
+@layer utilities {
+  /* The hairline used everywhere — flips with theme via --hairline-color */
+  .hairline {
+    border: 1px solid var(--hairline-color);
+  }
+}
